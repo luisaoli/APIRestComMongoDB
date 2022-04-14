@@ -1,6 +1,6 @@
 import express from "express";
 import db from "./config/dbConnect.js";
-import livros from "./models/Livro.js"
+//import livros from "./models/Livro.js" nao precisa mais porque todas as rotas estao no controller
 import routes from "./routes/index.js"
 
 db.on("error", console.log.bind(console, 'Erro de conexão'));
@@ -9,9 +9,7 @@ db.once("open", () => {
 })
 
 const app = express();
-
 app.use(express.json())
-
 routes(app)
 
 //nao precisa mais da const porque os livros vem do banco de dados
@@ -32,10 +30,11 @@ routes(app)
 //     }) 
 // })
 
-app.get('/livros/:id', (req, res) => {
-    let index = buscaLivro(req.params.id);
-    res.status(200).json(livros[index]);
-})
+// transferido pro controller
+// app.get('/livros/:id', (req, res) => {
+//     let index = buscaLivro(req.params.id);
+//     res.status(200).json(livros[index]);
+// })
 
 // rota transferida pro controller
 // app.post('/livros', (req, res) => {
@@ -50,15 +49,17 @@ app.get('/livros/:id', (req, res) => {
 //     res.status(200).json(livros);
 // })
 
-app.delete('/livros/:id', (req, res) => {
-    let {id} = req.params
-    let index = buscaLivro(id);
-    livros.splice(index, 1);
-    res.status(200).send(`Livro ${id} removido com sucesso`);
-})
+// transferido para o controller
+// app.delete('/livros/:id', (req, res) => {
+//     let {id} = req.params
+//     let index = buscaLivro(id);
+//     livros.splice(index, 1);
+//     res.status(200).send(`Livro ${id} removido com sucesso`);
+// })
 
-function buscaLivro(id) {
-    return livros.findIndex(livro => livro.id == id);
-}
+// o mongoose tem o método que faz a busca livro
+// function buscaLivro(id) {
+//     return livros.findIndex(livro => livro.id == id);
+// }
 
 export default app;
