@@ -43,11 +43,12 @@ app.get('/livros/:id', (req, res) => {
 //     res.status(201).send('Livro cadastrado com sucesso!');
 // })
 
-app.put('/livros/:id', (req, res) => {
-    let index = buscaLivro(req.params.id);
-    livros[index].titulo = req.body.titulo;
-    res.status(200).json(livros);
-})
+// transferido pro controller
+// app.put('/livros/:id', (req, res) => {
+//     let index = buscaLivro(req.params.id);
+//     livros[index].titulo = req.body.titulo;
+//     res.status(200).json(livros);
+// })
 
 app.delete('/livros/:id', (req, res) => {
     let {id} = req.params
